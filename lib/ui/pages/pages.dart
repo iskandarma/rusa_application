@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:rusa_application/models/models.dart';
@@ -12,5 +13,5 @@ part 'splash_screen_page.dart';
 part 'general_page.dart';
 part 'sign_up_page.dart';
 part 'address_page.dart';
-part 'food_page.dart';
+part 'product_page.dart';
 part 'main_page.dart';
