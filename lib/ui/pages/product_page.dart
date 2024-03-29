@@ -1,22 +1,28 @@
 part of 'pages.dart';
 
-class FoodPage extends StatelessWidget {
-  const FoodPage({super.key});
+class ProductPage extends StatelessWidget {
+  const ProductPage({super.key});
 
   @override
   Widget build(BuildContext context) {
+    TextEditingController searchContainer = TextEditingController();
     return Stack(
       children: [
         ListView(
           children: [
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 //HEADER
                 Container(
                     padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-                    height: 106,
+                    height: 200,
                     width: double.infinity,
                     decoration: BoxDecoration(
+                      image: DecorationImage(
+                          image: AssetImage('assets/banner.png'),
+                          fit: BoxFit.fitWidth),
+                      color: mainColor,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(15),
                           bottomRight: Radius.circular(15)),
@@ -26,23 +32,11 @@ class FoodPage extends StatelessWidget {
                             blurRadius: 15,
                             color: Colors.black45)
                       ],
-                      color: mainColor,
                     ),
                     child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          margin: EdgeInsets.only(top: 10),
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                              color: Colors.amber,
-                              borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(
-                                  image: AssetImage("assets/avatar.png"),
-                                  fit: BoxFit.cover)),
-                        ),
                         SizedBox(
                           width: 6,
                         ),
@@ -68,15 +62,137 @@ class FoodPage extends StatelessWidget {
                               ),
                               Text(
                                 "Blimbing, Malang",
-                                style: whiteFontStyle1,
+                                style: blackFontStyle3,
                               )
                             ],
                           ),
                         ),
                       ],
                     )),
-                //List Product
-                FoodCard(mockFood),
+                //Search
+                GFSearchBar(
+                  searchBoxInputDecoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(30)),
+                    prefixIcon: Icon(Icons.search),
+                    hintStyle: greyFontStyle,
+                    hintText: "Mau cari barang apa hari ini?",
+                  ),
+                  searchList: [],
+                  searchQueryBuilder: (query, list) {
+                    return [];
+                  },
+                  overlaySearchListItemBuilder: (item) {
+                    return Container(
+                      padding: const EdgeInsets.all(8),
+                      child: Text(
+                        'item',
+                        style: const TextStyle(fontSize: 18),
+                      ),
+                    );
+                  },
+                  onItemSelected: (item) {},
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Text(
+                    "Kategori",
+                    style: blackBoldFontStyle2,
+                  ),
+                ), //List Product
+                SizedBox(
+                  height: 10,
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: SizedBox(
+                    height: 50,
+                    child: ListView(
+                      scrollDirection: Axis.horizontal,
+                      children: [
+                        Row(
+                          children: [
+                            Column(
+                              children: [
+                                Image.asset(
+                                  "assets/furniture.png",
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
+                                Text("Furnitur", style: blackFontStyle4)
+                              ],
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  "assets/mobil.png",
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
+                                Text("Otomotif", style: blackFontStyle4)
+                              ],
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  "assets/jasa.png",
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
+                                Text("Jasa", style: blackFontStyle4)
+                              ],
+                            ),
+                            SizedBox(
+                              width: 15,
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  "assets/furniture.png",
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
+                                Text("Furniture", style: blackFontStyle4)
+                              ],
+                            ),
+                            Column(
+                              children: [
+                                Image.asset(
+                                  "assets/furniture.png",
+                                  height: 30,
+                                  fit: BoxFit.cover,
+                                ),
+                                Text("Furniture", style: blackFontStyle4)
+                              ],
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Center(
+                  child: Wrap(
+                    spacing: 12,
+                    runSpacing: 12,
+                    children: [
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                      FoodCard(mockFood),
+                    ],
+                  ),
+                )
               ],
             )
           ],
