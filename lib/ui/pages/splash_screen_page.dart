@@ -1,31 +1,24 @@
 part of 'pages.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
 
-  static const route = "/";
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-  @override
-  void initState() {
-    super.initState();
-    Future.delayed(
-      const Duration(seconds: 2),
-      () => Navigator.pushReplacementNamed(context, MainPage.route),
-    );
-  }
-  
   @override
   Widget build(BuildContext context) {
+    // Menggunakan GetX untuk menavigasi ke halaman home setelah splash screen
+    Future.delayed(Duration(seconds: 3), () {
+      Get.off(MainPage());
+    });
+
     return Scaffold(
       body: Center(
-        child: Image.asset(
-          "assets/logo_splash.png",
-          height: 150,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Center(
+              child: Image.asset("assets/logo_splash.png",height: 150,),
+            )
+          ],
         ),
       ),
     );

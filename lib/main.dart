@@ -1,22 +1,17 @@
 import 'package:flutter/material.dart';
-
-import 'package:google_fonts/google_fonts.dart';
-import 'package:rusa_application/routers/app_router.dart';
+import 'package:get/get.dart';
 import 'package:rusa_application/ui/pages/pages.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       home: SplashScreen(),
-      routes: AppRouter.routes,
     );
   }
 }

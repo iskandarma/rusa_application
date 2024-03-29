@@ -3,8 +3,6 @@ part of 'pages.dart';
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
-  static const route = "/main";
-
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -41,6 +39,9 @@ class _MainPageState extends State<MainPage> {
                 child: Text('Order'),
               ),
               Center(
+                child: Text('Product'),
+              ),
+              Center(
                 child: Text('Profile'),
               )
             ],
@@ -49,7 +50,7 @@ class _MainPageState extends State<MainPage> {
             alignment: Alignment.bottomCenter,
             child: CustomBottomNavbar(
               selectedIndex: selectedPage,
-              onTap: (index){
+              onTap: (index) {
                 setState(() {
                   selectedPage = index;
                 });

@@ -13,7 +13,7 @@ class CustomBottomNavbar extends StatelessWidget {
       width: double.infinity,
       color: Colors.white,
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           GestureDetector(
             onTap: (){
@@ -27,7 +27,7 @@ class CustomBottomNavbar extends StatelessWidget {
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                        'assets/ic_home' +
+                        'assets/icon_home' +
                             ((selectedIndex == 0) ? '.png' : '_normal.png'),
                       ),
                       fit: BoxFit.contain)),
@@ -42,11 +42,11 @@ class CustomBottomNavbar extends StatelessWidget {
             child: Container(
               width: 32,
               height: 32,
-              margin: EdgeInsets.symmetric(horizontal: 83),
+              // margin: EdgeInsets.symmetric(horizontal: 30),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                        'assets/ic_order' +
+                        'assets/icon_message' +
                             ((selectedIndex == 1) ? '.png' : '_normal.png'),
                       ),
                       fit: BoxFit.contain)),
@@ -61,11 +61,30 @@ class CustomBottomNavbar extends StatelessWidget {
             child: Container(
               width: 32,
               height: 32,
+              // margin: EdgeInsets.symmetric(horizontal: 30),
               decoration: BoxDecoration(
                   image: DecorationImage(
                       image: AssetImage(
-                        'assets/ic_profile' +
+                        'assets/icon_home_sale' +
                             ((selectedIndex == 2) ? '.png' : '_normal.png'),
+                      ),
+                      fit: BoxFit.contain)),
+            ),
+          ),
+          GestureDetector(
+            onTap: (){
+              if(onTap!=null) {
+                onTap!(3);
+              }
+            },
+            child: Container(
+              width: 32,
+              height: 32,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage(
+                        'assets/icon_user' +
+                            ((selectedIndex == 3) ? '.png' : '_normal.png'),
                       ),
                       fit: BoxFit.contain)),
             ),
