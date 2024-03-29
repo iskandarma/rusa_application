@@ -1,2 +1,1 @@
-part 'food.dart';
-// part 'banner.dart';
+part 'product.dart';

@@ -1,9 +1,9 @@
 part of 'widgets.dart';
 
 class FoodCard extends StatelessWidget {
-  final Food food;
+  final Product product;
 
-  FoodCard(this.food);
+  FoodCard(this.product);
 
   @override
   Widget build(BuildContext context) {
@@ -24,14 +24,14 @@ class FoodCard extends StatelessWidget {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(8), topRight: Radius.circular(8)),
               image: DecorationImage(
-                  image: AssetImage(food.picturePath!), fit: BoxFit.cover),
+                  image: AssetImage(product.picturePath!), fit: BoxFit.cover),
             ),
           ),
           Container(
             margin: EdgeInsets.fromLTRB(12, 12, 12, 0),
             width: 200,
             child: Text(
-              "Rp. " + food.price.toString(),
+              product.price.toString(),
               style: blackBoldFontStyle2,
               maxLines: 1,
               overflow: TextOverflow.clip,
@@ -41,7 +41,7 @@ class FoodCard extends StatelessWidget {
             margin: EdgeInsets.fromLTRB(12, 0, 12, 6),
             width: 200,
             child: Text(
-              food.name!,
+              product.name!,
               style: blackFontStyle3,
               maxLines: 1,
               overflow: TextOverflow.clip,
@@ -70,7 +70,7 @@ class FoodCard extends StatelessWidget {
                   margin: EdgeInsets.fromLTRB(0, 0, 0, 6),
                   width: 150,
                   child: Text(
-                    food.location!,
+                    product.location!,
                     style: blackFontStyle4,
                     maxLines: 1,
                     overflow: TextOverflow.clip,

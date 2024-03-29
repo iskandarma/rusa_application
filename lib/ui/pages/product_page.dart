@@ -94,17 +94,17 @@ class ProductPage extends StatelessWidget {
                   onItemSelected: (item) {},
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12),
+                  padding: const EdgeInsets.only(left: 25),
                   child: Text(
                     "Kategori",
                     style: blackBoldFontStyle2,
                   ),
                 ), //List Product
                 SizedBox(
-                  height: 10,
+                  height: 15,
                 ),
                 Padding(
-                  padding: const EdgeInsets.only(left: 12),
+                  padding: const EdgeInsets.only(left: 25),
                   child: SizedBox(
                     height: 50,
                     child: ListView(
@@ -119,11 +119,11 @@ class ProductPage extends StatelessWidget {
                                   height: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text("Furnitur", style: blackFontStyle4)
+                                Text("FURNITURE", style: blackFontStyle4)
                               ],
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 40,
                             ),
                             Column(
                               children: [
@@ -132,11 +132,11 @@ class ProductPage extends StatelessWidget {
                                   height: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text("Otomotif", style: blackFontStyle4)
+                                Text("OTOMOTIF", style: blackFontStyle4)
                               ],
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 40,
                             ),
                             Column(
                               children: [
@@ -145,30 +145,33 @@ class ProductPage extends StatelessWidget {
                                   height: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text("Jasa", style: blackFontStyle4)
+                                Text("JASA", style: blackFontStyle4)
                               ],
                             ),
                             SizedBox(
-                              width: 15,
+                              width: 40,
                             ),
                             Column(
                               children: [
                                 Image.asset(
-                                  "assets/furniture.png",
+                                  "assets/motor.png",
                                   height: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text("Furniture", style: blackFontStyle4)
+                                Text("MOTOR", style: blackFontStyle4)
                               ],
                             ),
+                            SizedBox(
+                              width: 40,
+                            ),
                             Column(
                               children: [
                                 Image.asset(
-                                  "assets/furniture.png",
+                                  "assets/elektronik.png",
                                   height: 30,
                                   fit: BoxFit.cover,
                                 ),
-                                Text("Furniture", style: blackFontStyle4)
+                                Text("ELEKTRONIK", style: blackFontStyle4)
                               ],
                             ),
                           ],
@@ -177,20 +180,44 @@ class ProductPage extends StatelessWidget {
                     ),
                   ),
                 ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(left: 25),
+                      child: Text(
+                        "Produk Terbaru",
+                        style: blackBoldFontStyle2,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(right: 25),
+                      child: Text(
+                        "Lihat Semua",
+                        style: TextStyle(color: Colors.blue),
+                      ),
+                    )
+                  ],
+                ),
                 Center(
-                  child: Wrap(
-                    spacing: 12,
-                    runSpacing: 12,
-                    children: [
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                      FoodCard(mockFood),
-                    ],
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
+                    child: Wrap(
+                      //Horizontal
+                      spacing: 30,
+                      //Vertical
+                      runSpacing: 15,
+                      children: [
+                        FoodCard(mockProduct),
+                        FoodCard(mockProduct2),
+                        FoodCard(mockProduct3),
+                        FoodCard(mockProduct4),
+                        FoodCard(mockProduct5),
+                      ],
+                    ),
                   ),
                 )
               ],

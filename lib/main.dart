@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:google_fonts/google_fonts.dart';
+import 'package:rusa_application/routers/app_router.dart';
 import 'package:rusa_application/ui/pages/pages.dart';
-import 'package:rusa_application/ui/widgets/banner/final_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -15,7 +15,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const MainPage(),
+      home: SplashScreen(),
+      routes: AppRouter.routes,
     );
   }
 }

@@ -3,6 +3,8 @@ part of 'pages.dart';
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
+  static const route = "/main";
+
   @override
   State<MainPage> createState() => _MainPageState();
 }
