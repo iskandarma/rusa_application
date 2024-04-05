@@ -72,7 +72,9 @@ class _SignInPageState extends State<SignInPage> {
             child: isLoading
                 ? SpinKitFadingCircle(size: 45, color: mainColor)
                 : ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Get.to(MainPage());
+                    },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainColor,
                         shape: RoundedRectangleBorder(

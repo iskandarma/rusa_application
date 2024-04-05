@@ -23,7 +23,7 @@ class Product {
 
 Product mockProduct = Product(
     id: 1,
-    picturePath: "keramik.png",
+    picturePath: "assets/keramik.png",
     name: "Kramik Motif Coklat",
     description:
         "",
@@ -34,7 +34,7 @@ Product mockProduct = Product(
 
 Product mockProduct2 = Product(
     id: 2,
-    picturePath: "cat.png",
+    picturePath: "assets/cat.png",
     name: "Cat Pargon 1/2 L",
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
@@ -45,7 +45,7 @@ Product mockProduct2 = Product(
 
 Product mockProduct3 = Product(
     id: 3,
-    picturePath: "kayu.png",
+    picturePath: "assets/kayu.png",
     name: "Kayu Ulin Bekas",
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
@@ -56,7 +56,7 @@ Product mockProduct3 = Product(
 
 Product mockProduct4 = Product(
     id: 4,
-    picturePath: "laptop.png",
+    picturePath: "assets/laptop.png",
     name: "Laptop Hp N123",
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
@@ -67,7 +67,7 @@ Product mockProduct4 = Product(
 
 Product mockProduct5 = Product(
     id: 5,
-    picturePath: "kramik.jpeg",
+    picturePath: "assets/keramik.png",
     name: "Kramik",
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",

@@ -21,7 +21,7 @@ class ProductPage extends StatelessWidget {
                     decoration: BoxDecoration(
                       image: DecorationImage(
                           image: AssetImage('assets/banner.png'),
-                          fit: BoxFit.fitWidth),
+                          fit: BoxFit.fill),
                       color: mainColor,
                       borderRadius: BorderRadius.only(
                           bottomLeft: Radius.circular(15),
@@ -207,15 +207,15 @@ class ProductPage extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(15, 15, 15, 15),
                     child: Wrap(
                       //Horizontal
-                      spacing: 30,
+                      spacing: 15,
                       //Vertical
                       runSpacing: 15,
                       children: [
-                        FoodCard(mockProduct),
-                        FoodCard(mockProduct2),
-                        FoodCard(mockProduct3),
-                        FoodCard(mockProduct4),
-                        FoodCard(mockProduct5),
+                        ProductCard(mockProduct),
+                        ProductCard(mockProduct2),
+                        ProductCard(mockProduct3),
+                        ProductCard(mockProduct4),
+                        ProductCard(mockProduct5),
                       ],
                     ),
                   ),
