@@ -8,21 +8,32 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
+  TextEditingController emailController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
+
+  bool isObscure = true;
+  bool isLoading = false;
+  Icon passwordIcon = const Icon(Icons.visibility);
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    bool isLoading = false;
     return GeneralPage(
-      title: 'Sign In',
-      subtitle: 'Nama Aplikasi',
+      title: 'Login',
+      subtitle: 'Rukun Sesama',
+      onBackButtonPressed: (){
+        Get.to(MainPage());
+      },
       child: Column(
         children: [
+          Container(
+              margin: EdgeInsets.symmetric(vertical: 50),
+              width: 200,
+              child: Image(image: AssetImage("assets/logo_no_tag.png"))),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
             child: Text(
-              'Email',
+              'Username',
               style: blackFontStyle2,
             ),
           ),
@@ -38,7 +49,7 @@ class _SignInPageState extends State<SignInPage> {
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
-                  hintText: 'Masukkan alamat email'),
+                  hintText: 'Masukkan username'),
             ),
           ),
           Container(
@@ -50,20 +61,37 @@ class _SignInPageState extends State<SignInPage> {
             ),
           ),
           Container(
-            width: double.infinity,
-            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
-            padding: EdgeInsets.symmetric(horizontal: 10),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(8),
-                border: Border.all(color: Colors.black)),
-            child: TextField(
-              controller: passwordController,
-              decoration: InputDecoration(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: passwordController,
+                obscureText: isObscure,
+                decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
-                  hintText: 'Masukkan password'),
-            ),
-          ),
+                  hintText: 'Masukkan password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        isObscure = !isObscure;
+                        if (isObscure) {
+                          passwordIcon = const Icon(Icons.visibility);
+                        } else {
+                          passwordIcon = const Icon(
+                            Icons.visibility_off,
+                            color: Colors.blue,
+                          );
+                        }
+                      });
+                    },
+                    icon: passwordIcon,
+                  ),
+                ),
+              )),
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: 24),
@@ -80,7 +108,7 @@ class _SignInPageState extends State<SignInPage> {
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8))),
                     child: Text(
-                      'Masuk',
+                      'Login',
                       style: GoogleFonts.poppins(
                         color: Colors.white,
                         fontWeight: FontWeight.w500,

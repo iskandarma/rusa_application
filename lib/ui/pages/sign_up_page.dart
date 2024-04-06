@@ -14,8 +14,8 @@ class _SignUpPageState extends State<SignUpPage> {
     TextEditingController passwordController = TextEditingController();
     TextEditingController nameController = TextEditingController();
     return GeneralPage(
-      title: 'Sign Up',
-      subtitle: 'Nama Aplikasi',
+      title: 'Register',
+      subtitle: 'Rukun Sesama',
       onBackButtonPressed: (){
         Get.to(SignInPage());
       },

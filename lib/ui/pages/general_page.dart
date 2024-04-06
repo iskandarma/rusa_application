@@ -36,7 +36,7 @@ class GeneralPage extends StatelessWidget {
                     padding: EdgeInsets.symmetric(horizontal: defaultMargin),
                     width: double.infinity,
                     height: 100,
-                    color: Colors.white,
+                    color: "E5E5E5".toColor(),
                     child: Row(
                       children: [
                         onBackButtonPressed != null
@@ -76,11 +76,6 @@ class GeneralPage extends StatelessWidget {
                         )
                       ],
                     ),
-                  ),
-                  Container(
-                    height: defaultMargin,
-                    width: double.infinity,
-                    color: "E5E5E5".toColor(),
                   ),
                   child ?? SizedBox()
                 ],
