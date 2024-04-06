@@ -8,6 +8,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController _emailController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
+  TextEditingController _konfirmasiPasswordController = TextEditingController();
+
+  bool _isObscure = true;
+  bool _isLoading = false;
+  Icon _passwordIcon = const Icon(Icons.visibility);
+
   @override
   Widget build(BuildContext context) {
     TextEditingController emailController = TextEditingController();
@@ -16,7 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
     return GeneralPage(
       title: 'Register',
       subtitle: 'Rukun Sesama',
-      onBackButtonPressed: (){
+      onBackButtonPressed: () {
         Get.to(SignInPage());
       },
       child: Column(
@@ -32,17 +40,16 @@ class _SignUpPageState extends State<SignUpPage> {
             child: Container(
               decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  image:
-                      DecorationImage(
-                        image: AssetImage('assets/avatar.png'),
-                        fit: BoxFit.cover)),
+                  image: DecorationImage(
+                      image: AssetImage('assets/avatar.png'),
+                      fit: BoxFit.cover)),
             ),
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              'Nama Lengkap',
+              'Nama',
               style: blackFontStyle2,
             ),
           ),
@@ -65,7 +72,7 @@ class _SignUpPageState extends State<SignUpPage> {
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              'Alamat Email',
+              'Email',
               style: blackFontStyle2,
             ),
           ),
@@ -81,14 +88,14 @@ class _SignUpPageState extends State<SignUpPage> {
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
-                  hintText: 'Masukkan alamat email'),
+                  hintText: 'Contoh : contoh@gmail.com'),
             ),
           ),
           Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
             child: Text(
-              'Password',
+              'No. Hp',
               style: blackFontStyle2,
             ),
           ),
@@ -100,13 +107,93 @@ class _SignUpPageState extends State<SignUpPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: passwordController,
+              controller: emailController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
-                  hintText: 'Masukkan password'),
+                  hintText: 'Contoh : 082312xxx'),
             ),
           ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
+            child: Text(
+              'Password',
+              style: blackFontStyle2,
+            ),
+          ),
+          Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: _passwordController,
+                obscureText: _isObscure,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: greyFontStyle,
+                  hintText: 'Masukkan password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                        if (_isObscure) {
+                          _passwordIcon = const Icon(Icons.visibility);
+                        } else {
+                          _passwordIcon = const Icon(
+                            Icons.visibility_off,
+                            color: Colors.blue,
+                          );
+                        }
+                      });
+                    },
+                    icon: _passwordIcon,
+                  ),
+                ),
+              )),
+              Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
+            child: Text(
+              'Konfirmasi Password',
+              style: blackFontStyle2,
+            ),
+          ),
+          Container(
+              width: double.infinity,
+              margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.black)),
+              child: TextField(
+                controller: _konfirmasiPasswordController,
+                obscureText: _isObscure,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: greyFontStyle,
+                  hintText: 'Ketik ulang password',
+                  suffixIcon: IconButton(
+                    onPressed: () {
+                      setState(() {
+                        _isObscure = !_isObscure;
+                        if (_isObscure) {
+                          _passwordIcon = const Icon(Icons.visibility);
+                        } else {
+                          _passwordIcon = const Icon(
+                            Icons.visibility_off,
+                            color: Colors.blue,
+                          );
+                        }
+                      });
+                    },
+                    icon: _passwordIcon,
+                  ),
+                ),
+              )),
           Container(
             width: double.infinity,
             margin: EdgeInsets.only(top: 24),

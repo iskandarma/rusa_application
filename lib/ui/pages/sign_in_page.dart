@@ -11,16 +11,16 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  bool isObscure = true;
-  bool isLoading = false;
-  Icon passwordIcon = const Icon(Icons.visibility);
+  bool _isObscure = true;
+  bool _isLoading = false;
+  Icon _passwordIcon = const Icon(Icons.visibility);
 
   @override
   Widget build(BuildContext context) {
     return GeneralPage(
       title: 'Login',
       subtitle: 'Rukun Sesama',
-      onBackButtonPressed: (){
+      onBackButtonPressed: () {
         Get.to(MainPage());
       },
       child: Column(
@@ -69,7 +69,7 @@ class _SignInPageState extends State<SignInPage> {
                   border: Border.all(color: Colors.black)),
               child: TextField(
                 controller: passwordController,
-                obscureText: isObscure,
+                obscureText: _isObscure,
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -77,18 +77,18 @@ class _SignInPageState extends State<SignInPage> {
                   suffixIcon: IconButton(
                     onPressed: () {
                       setState(() {
-                        isObscure = !isObscure;
-                        if (isObscure) {
-                          passwordIcon = const Icon(Icons.visibility);
+                        _isObscure = !_isObscure;
+                        if (_isObscure) {
+                          _passwordIcon = const Icon(Icons.visibility);
                         } else {
-                          passwordIcon = const Icon(
+                          _passwordIcon = const Icon(
                             Icons.visibility_off,
                             color: Colors.blue,
                           );
                         }
                       });
                     },
-                    icon: passwordIcon,
+                    icon: _passwordIcon,
                   ),
                 ),
               )),
@@ -97,7 +97,7 @@ class _SignInPageState extends State<SignInPage> {
             margin: EdgeInsets.only(top: 24),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
+            child: _isLoading
                 ? SpinKitFadingCircle(size: 45, color: mainColor)
                 : ElevatedButton(
                     onPressed: () {
@@ -121,7 +121,7 @@ class _SignInPageState extends State<SignInPage> {
             margin: EdgeInsets.only(top: 24),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
-            child: isLoading
+            child: _isLoading
                 ? SpinKitFadingCircle(size: 45, color: mainColor)
                 : ElevatedButton(
                     onPressed: () {
