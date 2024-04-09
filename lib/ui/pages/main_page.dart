@@ -96,7 +96,7 @@ class _MainPageState extends State<MainPage> {
                   child: Text('Shops'),
                 ),
                 Center(
-                  child: SignInPage(),
+                  child: ProfilePage(),
                 )
               ],
             ),
