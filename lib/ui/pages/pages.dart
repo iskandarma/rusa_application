@@ -18,3 +18,4 @@ part 'address_page.dart';
 part 'product_page.dart';
 part 'main_page.dart';
 part 'profile_page.dart';
+part 'change_profile.dart';
