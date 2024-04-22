@@ -8,7 +8,7 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController emailController = TextEditingController();
+  TextEditingController usernameController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
   bool _isObscure = true;
@@ -45,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: emailController,
+              controller: usernameController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -104,7 +104,7 @@ class _SignInPageState extends State<SignInPage> {
                       final response = await SupabaseConfig.supabase
                           .from('users')
                           .select('*')
-                          .eq('email', emailController.text.trim())
+                          .eq('username', usernameController.text.trim())
                           .eq(
                               'password',
                               PasswordHash.generateSha1(
