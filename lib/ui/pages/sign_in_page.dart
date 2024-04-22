@@ -100,8 +100,22 @@ class _SignInPageState extends State<SignInPage> {
             child: _isLoading
                 ? SpinKitFadingCircle(size: 45, color: mainColor)
                 : ElevatedButton(
-                    onPressed: () {
-                      Get.to(MainPage());
+                    onPressed: () async {
+                      final response = await SupabaseConfig.supabase
+                          .from('users')
+                          .select('*')
+                          .eq('email', emailController.text.trim())
+                          .eq(
+                              'password',
+                              PasswordHash.generateSha1(
+                                  passwordController.text.trim()));
+                      if (response.isNotEmpty) {
+                        Get.to(MainPage());
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                            content: Text('Username / password salah')));
+                      }
+                      log("responseLogin:  $response");
                     },
                     style: ElevatedButton.styleFrom(
                         backgroundColor: mainColor,

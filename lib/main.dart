@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:rusa_application/services/supabase_config.dart';
 import 'package:rusa_application/ui/pages/pages.dart';
 
-void main() {
+Future<void> main() async {
+  await SupabaseConfig.init();
   runApp(MyApp());
 }
 
@@ -11,7 +13,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      home: ChangeProfile(),
+      home: SignInPage(),
     );
   }
 }
