@@ -8,9 +8,11 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _phoneNumberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
-  TextEditingController _konfirmasiPasswordController = TextEditingController();
+  TextEditingController _confirmPasswordController = TextEditingController();
 
   bool _isObscure = true;
   bool _isLoading = false;
@@ -18,9 +20,6 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController emailController = TextEditingController();
-    TextEditingController passwordController = TextEditingController();
-    TextEditingController nameController = TextEditingController();
     return GeneralPage(
       title: 'Register',
       subtitle: 'Rukun Sesama',
@@ -61,7 +60,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: nameController,
+              controller: _nameController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -84,7 +83,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: emailController,
+              controller: _emailController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -107,7 +106,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: emailController,
+              controller: _phoneNumberController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -154,7 +153,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   ),
                 ),
               )),
-              Container(
+          Container(
             width: double.infinity,
             margin: EdgeInsets.fromLTRB(defaultMargin, 26, defaultMargin, 6),
             child: Text(
@@ -170,7 +169,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.black)),
               child: TextField(
-                controller: _konfirmasiPasswordController,
+                controller: _confirmPasswordController,
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -200,8 +199,26 @@ class _SignUpPageState extends State<SignUpPage> {
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ElevatedButton(
-              onPressed: () {
-                Get.to(AddressPage());
+              onPressed: () async {
+                final getEmail = await SupabaseConfig.supabase
+                    .from('users')
+                    .select('email')
+                    .eq('email', _emailController.text.trim());
+                final getPhoneNumber = await SupabaseConfig.supabase
+                    .from('users')
+                    .select('no_hp')
+                    .eq('no_hp', _phoneNumberController.text.trim());
+                if (getEmail.isNotEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('email sudah terdaftar')));
+                } else if (getPhoneNumber.isNotEmpty) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Np Hp sudah terdaftar')));
+                } else {
+                  Get.to(AddressPage());
+                }
+                log("responseEmail:  $getEmail");
+                log("responsePhoneNumber:  $getPhoneNumber");
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: mainColor,
