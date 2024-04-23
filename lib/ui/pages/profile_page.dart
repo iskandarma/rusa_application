@@ -61,26 +61,26 @@ class ProfilePage extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   width: double.infinity,
                   height: 70,
-                  decoration: BoxDecoration(
-                      color: "E5E5E5".toColor(),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 15,
-                            spreadRadius: 3,
-                            color: Colors.black12)
-                      ]),
-                  child: Row(
-                    children: [
-                      Icon(LineIcons.user),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Ubah Profile",
-                        style: blackFontStyle2,
-                      )
-                    ],
+                  child: ElevatedButton(
+                    onPressed: (){
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: "E5E5E5".toColor(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    child: Row(
+                      children: [
+                        Icon(LineIcons.user),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Ubah Profile",
+                          style: blackFontStyle2,
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -88,26 +88,26 @@ class ProfilePage extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   width: double.infinity,
                   height: 70,
-                  decoration: BoxDecoration(
-                      color: "E5E5E5".toColor(),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 15,
-                            spreadRadius: 3,
-                            color: Colors.black12)
-                      ]),
-                  child: Row(
-                    children: [
-                      Icon(LineIcons.boxOpen),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Produk Saya",
-                        style: blackFontStyle2,
-                      )
-                    ],
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: "E5E5E5".toColor(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    onPressed: () {
+                      Get.to(ProductPage());
+                    },
+                    child: Row(
+                      children: [
+                        Icon(LineIcons.boxOpen),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Produk Saya",
+                          style: blackFontStyle2,
+                        )
+                      ],
+                    ),
                   ),
                 ),
                 Container(
@@ -115,26 +115,26 @@ class ProfilePage extends StatelessWidget {
                   padding: EdgeInsets.all(10),
                   width: double.infinity,
                   height: 70,
-                  decoration: BoxDecoration(
-                      color: "E5E5E5".toColor(),
-                      borderRadius: BorderRadius.circular(8),
-                      boxShadow: [
-                        BoxShadow(
-                            blurRadius: 15,
-                            spreadRadius: 3,
-                            color: Colors.black12)
-                      ]),
-                  child: Row(
-                    children: [
-                      Icon(LineIcons.shoppingBasket),
-                      SizedBox(
-                        width: 10,
-                      ),
-                      Text(
-                        "Transaksi",
-                        style: blackFontStyle2,
-                      )
-                    ],
+                  child: ElevatedButton(
+                    onPressed: (){
+
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: "E5E5E5".toColor(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    child: Row(
+                      children: [
+                        Icon(LineIcons.shoppingBasket),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Transaksi",
+                          style: blackFontStyle2,
+                        )
+                      ],
+                    ),
                   ),
                 )
               ],
