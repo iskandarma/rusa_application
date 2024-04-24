@@ -87,7 +87,7 @@ class _MainPageState extends State<MainPage> {
               },
               children: [
                 Center(
-                  child: ProductPage(),
+                  child: HomePage(),
                 ),
                 Center(
                   child: Text('Chats'),

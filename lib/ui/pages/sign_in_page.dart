@@ -8,8 +8,8 @@ class SignInPage extends StatefulWidget {
 }
 
 class _SignInPageState extends State<SignInPage> {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
+  TextEditingController _passwordController = TextEditingController();
 
   bool _isObscure = true;
   bool _isLoading = false;
@@ -45,7 +45,7 @@ class _SignInPageState extends State<SignInPage> {
                 borderRadius: BorderRadius.circular(8),
                 border: Border.all(color: Colors.black)),
             child: TextField(
-              controller: usernameController,
+              controller: _usernameController,
               decoration: InputDecoration(
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
@@ -68,7 +68,7 @@ class _SignInPageState extends State<SignInPage> {
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.black)),
               child: TextField(
-                controller: passwordController,
+                controller: _passwordController,
                 obscureText: _isObscure,
                 decoration: InputDecoration(
                   border: InputBorder.none,
@@ -104,11 +104,11 @@ class _SignInPageState extends State<SignInPage> {
                       final response = await SupabaseConfig.supabase
                           .from('users')
                           .select('*')
-                          .eq('username', usernameController.text.trim())
+                          .eq('username', _usernameController.text.trim())
                           .eq(
                               'password',
                               PasswordHash.generateSha1(
-                                  passwordController.text.trim()));
+                                  _passwordController.text.trim()));
                       if (response.isNotEmpty) {
                         Get.to(MainPage());
                       } else {
