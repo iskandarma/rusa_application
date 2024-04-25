@@ -19,14 +19,7 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isLoading = false;
   Icon _passwordIcon = const Icon(Icons.visibility);
 
-  final _formKey = GlobalKey<FormState>();
-
-  Future<void> _signUp() async {
-    // final isValid = _formKey.currentState!.validate();
-    // if (!isValid) {
-    //   return;
-    // }
-    
+  Future<void> _signUp() async {    
     final email = _emailController.text;
     final password = _passwordController.text;
     final username = _usernameController.text;
@@ -261,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))),
               child: Text(
-                'Lanjutkan',
+                'Register',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
