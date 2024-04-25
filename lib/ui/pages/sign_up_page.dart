@@ -33,13 +33,11 @@ class _SignUpPageState extends State<SignUpPage> {
     final name = _nameController.text;
     final phoneNumber = _phoneNumberController.text;
     try {
-      log("start debug");
       await supabase.auth.signUp(email: email, password: password, data: {
         'name': name,
         'username': username,
         'phone_number': phoneNumber
       });
-      log("end debug");
       Get.to(MainPage());
     } on AuthException catch (error) {
       context.showErrorSnackBar(message: error.message);
