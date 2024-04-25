@@ -9,8 +9,6 @@ class AddProductPage extends StatefulWidget {
 
 class _AddProductPageState extends State<AddProductPage> {
   TextEditingController _nameController = TextEditingController();
-  TextEditingController _categoryController = TextEditingController();
-  TextEditingController _transactionTypeController = TextEditingController();
   TextEditingController _descriptionController = TextEditingController();
   TextEditingController _quantityController = TextEditingController();
 

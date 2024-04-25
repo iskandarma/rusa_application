@@ -10,7 +10,6 @@ import 'package:rusa_application/models/models.dart';
 import 'package:rusa_application/shared/shared.dart';
 import 'package:rusa_application/ui/widgets/widgets.dart';
 import 'package:rusa_application/utils/constants.dart';
-import 'package:rusa_application/utils/password_hash.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:supercharged/supercharged.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';

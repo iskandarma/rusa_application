@@ -10,6 +10,7 @@ class SignUpPage extends StatefulWidget {
 class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _nameController = TextEditingController();
   TextEditingController _emailController = TextEditingController();
+  TextEditingController _usernameController = TextEditingController();
   TextEditingController _phoneNumberController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
   TextEditingController _confirmPasswordController = TextEditingController();
@@ -17,6 +18,40 @@ class _SignUpPageState extends State<SignUpPage> {
   bool _isObscure = true;
   bool _isLoading = false;
   Icon _passwordIcon = const Icon(Icons.visibility);
+
+  final _formKey = GlobalKey<FormState>();
+
+  Future<void> _signUp() async {
+    // final isValid = _formKey.currentState!.validate();
+    // if (!isValid) {
+    //   return;
+    // }
+    
+    final email = _emailController.text;
+    final password = _passwordController.text;
+    final username = _usernameController.text;
+    final name = _nameController.text;
+    final phoneNumber = _phoneNumberController.text;
+    try {
+      log("start debug");
+      await supabase.auth.signUp(email: email, password: password, data: {
+        'name': name,
+        'username': username,
+        'phone_number': phoneNumber
+      });
+      log("end debug");
+      Get.to(MainPage());
+    } on AuthException catch (error) {
+      context.showErrorSnackBar(message: error.message);
+    } catch (error) {
+      context.showErrorSnackBar(message: unexpectedErrorMessage);
+    }
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,6 +123,29 @@ class _SignUpPageState extends State<SignUpPage> {
                   border: InputBorder.none,
                   hintStyle: greyFontStyle,
                   hintText: 'Contoh : contoh@gmail.com'),
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.fromLTRB(defaultMargin, 16, defaultMargin, 6),
+            child: Text(
+              'Username',
+              style: blackFontStyle2,
+            ),
+          ),
+          Container(
+            width: double.infinity,
+            margin: EdgeInsets.symmetric(horizontal: defaultMargin),
+            padding: EdgeInsets.symmetric(horizontal: 10),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                border: Border.all(color: Colors.black)),
+            child: TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintStyle: greyFontStyle,
+                  hintText: 'Masukkan username'),
             ),
           ),
           Container(
@@ -195,31 +253,11 @@ class _SignUpPageState extends State<SignUpPage> {
               )),
           Container(
             width: double.infinity,
-            margin: EdgeInsets.only(top: 24),
+            margin: EdgeInsets.only(top: 24, bottom: 24),
             height: 45,
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ElevatedButton(
-              onPressed: () async {
-              //   final getEmail = await supabase
-              //       .from('users')
-              //       .select('email')
-              //       .eq('email', _emailController.text.trim());
-              //   final getPhoneNumber = await supabase
-              //       .from('users')
-              //       .select('no_hp')
-              //       .eq('no_hp', _phoneNumberController.text.trim());
-              //   if (getEmail.isNotEmpty) {
-              //     ScaffoldMessenger.of(context).showSnackBar(
-              //         SnackBar(content: Text('email sudah terdaftar')));
-              //   } else if (getPhoneNumber.isNotEmpty) {
-              //     ScaffoldMessenger.of(context).showSnackBar(
-              //         SnackBar(content: Text('Np Hp sudah terdaftar')));
-              //   } else {
-                  Get.to(AddressPage());
-              //   }
-              //   log("responseEmail:  $getEmail");
-              //   log("responsePhoneNumber:  $getPhoneNumber");
-              },
+              onPressed: _isLoading ? null : _signUp,
               style: ElevatedButton.styleFrom(
                   backgroundColor: mainColor,
                   shape: RoundedRectangleBorder(
