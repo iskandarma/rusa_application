@@ -50,7 +50,7 @@ class _SignInPageState extends State<SignInPage> {
       title: 'Login',
       subtitle: 'Rukun Sesama',
       onBackButtonPressed: () {
-        Get.to(HomePage());
+        Get.to(MainPage());
       },
       child: Column(
         children: [

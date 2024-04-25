@@ -1,7 +1,33 @@
 part of 'pages.dart';
 
-class ProfilePage extends StatelessWidget {
+class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
+
+  @override
+  State<ProfilePage> createState() => _ProfilePageState();
+}
+
+class _ProfilePageState extends State<ProfilePage> {
+  bool _isLoading = false;
+  
+  Future<void> _signOut() async {
+    setState(() {
+      _isLoading = true;
+    });
+    try {
+      await supabase.auth.signOut();
+      Get.to(SignInPage());
+    } on AuthException catch (error) {
+      context.showErrorSnackBar(message: error.message);
+    } catch (_) {
+      context.showErrorSnackBar(message: unexpectedErrorMessage);
+    }
+    if (mounted) {
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -131,6 +157,34 @@ class ProfilePage extends StatelessWidget {
                         ),
                         Text(
                           "Transaksi",
+                          style: blackFontStyle2,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(top: 15, left: 16, right: 16),
+                  padding: EdgeInsets.all(10),
+                  width: double.infinity,
+                  height: 70,
+                  child: ElevatedButton(
+                    onPressed: (){
+                      _signOut();
+                      Get.to(SignInPage());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: "E5E5E5".toColor(),
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout),
+                        SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          "Log Out",
                           style: blackFontStyle2,
                         )
                       ],

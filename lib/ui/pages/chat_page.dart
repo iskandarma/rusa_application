@@ -19,17 +19,20 @@ class ChatPage extends StatefulWidget {
 class _ChatPageState extends State<ChatPage> {
   late final Stream<List<Message>> _messagesStream;
   final Map<String, Profile> _profileCache = {};
+  final session = supabase.auth.currentSession;
 
   @override
   void initState() {
-    final myUserId = supabase.auth.currentUser!.id;
-    _messagesStream = supabase
-        .from('messages')
-        .stream(primaryKey: ['id'])
-        .order('created_at')
-        .map((maps) => maps
-            .map((map) => Message.fromMap(map: map, myUserId: myUserId))
-            .toList());
+    if (session != null) {
+      final myUserId = supabase.auth.currentUser!.id;
+      _messagesStream = supabase
+          .from('messages')
+          .stream(primaryKey: ['id'])
+          .order('created_at')
+          .map((maps) => maps
+              .map((map) => Message.fromMap(map: map, myUserId: myUserId))
+              .toList());
+    }
     super.initState();
   }
 
@@ -52,44 +55,65 @@ class _ChatPageState extends State<ChatPage> {
         title: const Text('Chats'),
         automaticallyImplyLeading: false,
       ),
-      body: StreamBuilder<List<Message>>(
-        stream: _messagesStream,
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final messages = snapshot.data!;
-            return Column(
+      body: session == null
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Expanded(
-                  child: messages.isEmpty
-                      ? const Center(
-                          child: Text('Belum ada data chat'),
-                        )
-                      : ListView.builder(
-                          reverse: true,
-                          itemCount: messages.length,
-                          itemBuilder: (context, index) {
-                            final message = messages[index];
-
-                            /// I know it's not good to include code that is not related
-                            /// to rendering the widget inside build method, but for
-                            /// creating an app quick and dirty, it's fine 😂
-                            _loadProfileCache(message.profileId);
-
-                            return _ChatBubble(
-                              message: message,
-                              profile: _profileCache[message.profileId],
-                            );
-                          },
-                        ),
-                ),
-                const _MessageBar(),
+                Center(
+                    child: Text(
+                        'Anda belum Login, Silahkan login terlebih dahulu')),
+                        SizedBox(height: 20,),
+                ElevatedButton(
+                    onPressed: () {
+                      Get.to(SignInPage());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: mainColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    child: Text(
+                      'Login',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
               ],
-            );
-          } else {
-            return preloader;
-          }
-        },
-      ),
+            )
+          : StreamBuilder<List<Message>>(
+              stream: _messagesStream,
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  final messages = snapshot.data!;
+                  return Column(
+                    children: [
+                      Expanded(
+                        child: messages.isEmpty
+                            ? const Center(
+                                child: Text('Belum ada data chat'),
+                              )
+                            : ListView.builder(
+                                reverse: true,
+                                itemCount: messages.length,
+                                itemBuilder: (context, index) {
+                                  final message = messages[index];
+                                  _loadProfileCache(message.profileId);
+
+                                  return _ChatBubble(
+                                    message: message,
+                                    profile: _profileCache[message.profileId],
+                                  );
+                                },
+                              ),
+                      ),
+                      const _MessageBar(),
+                    ],
+                  );
+                } else {
+                  return preloader;
+                }
+              },
+            ),
     );
   }
 }
@@ -200,9 +224,7 @@ class _ChatBubble extends StatelessWidget {
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color: message.isMine
-                ? "CBDDFB".toColor()
-                : Colors.grey[300],
+            color: message.isMine ? "CBDDFB".toColor() : Colors.grey[300],
             borderRadius: BorderRadius.circular(8),
           ),
           child: Text(message.content),
