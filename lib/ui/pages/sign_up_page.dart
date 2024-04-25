@@ -200,25 +200,25 @@ class _SignUpPageState extends State<SignUpPage> {
             padding: EdgeInsets.symmetric(horizontal: defaultMargin),
             child: ElevatedButton(
               onPressed: () async {
-                final getEmail = await SupabaseConfig.supabase
-                    .from('users')
-                    .select('email')
-                    .eq('email', _emailController.text.trim());
-                final getPhoneNumber = await SupabaseConfig.supabase
-                    .from('users')
-                    .select('no_hp')
-                    .eq('no_hp', _phoneNumberController.text.trim());
-                if (getEmail.isNotEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('email sudah terdaftar')));
-                } else if (getPhoneNumber.isNotEmpty) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(content: Text('Np Hp sudah terdaftar')));
-                } else {
+              //   final getEmail = await supabase
+              //       .from('users')
+              //       .select('email')
+              //       .eq('email', _emailController.text.trim());
+              //   final getPhoneNumber = await supabase
+              //       .from('users')
+              //       .select('no_hp')
+              //       .eq('no_hp', _phoneNumberController.text.trim());
+              //   if (getEmail.isNotEmpty) {
+              //     ScaffoldMessenger.of(context).showSnackBar(
+              //         SnackBar(content: Text('email sudah terdaftar')));
+              //   } else if (getPhoneNumber.isNotEmpty) {
+              //     ScaffoldMessenger.of(context).showSnackBar(
+              //         SnackBar(content: Text('Np Hp sudah terdaftar')));
+              //   } else {
                   Get.to(AddressPage());
-                }
-                log("responseEmail:  $getEmail");
-                log("responsePhoneNumber:  $getPhoneNumber");
+              //   }
+              //   log("responseEmail:  $getEmail");
+              //   log("responsePhoneNumber:  $getPhoneNumber");
               },
               style: ElevatedButton.styleFrom(
                   backgroundColor: mainColor,

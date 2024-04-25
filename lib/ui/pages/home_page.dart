@@ -6,8 +6,8 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     TextEditingController searchContainer = TextEditingController();
-    return Stack(
-      children: [
+    return Scaffold(
+      body: 
         ListView(
           children: [
             Column(
@@ -224,7 +224,6 @@ class HomePage extends StatelessWidget {
             )
           ],
         ),
-      ],
     );
   }
 }
