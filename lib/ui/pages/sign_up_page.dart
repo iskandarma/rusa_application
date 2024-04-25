@@ -254,7 +254,7 @@ class _SignUpPageState extends State<SignUpPage> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8))),
               child: Text(
-                'Lanjutkan',
+                'Register',
                 style: GoogleFonts.poppins(
                   color: Colors.white,
                   fontWeight: FontWeight.w500,
