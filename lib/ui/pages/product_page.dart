@@ -8,6 +8,39 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  late final Stream _productsStream;
+  final Map<String, Profile> _profileCache = {};
+  final session = supabase.auth.currentSession;
+
+  @override
+  void initState() {
+    if (session != null) {
+      final myUserId = supabase.auth.currentUser!.id;
+      _productsStream = supabase
+          .from('products')
+          .stream(primaryKey: ['id'])
+          .eq('profile_id', myUserId)
+          .order('created_at');
+      // .map((maps) => maps
+      //     .map((map) => Product.fromMap(map: map, myUserId: myUserId))
+      //     .toList());
+      //     log('Sukses' + _productsStream.toString());
+    }
+    super.initState();
+  }
+
+  Future<void> _loadProfileCache(String profileId) async {
+    if (_profileCache[profileId] != null) {
+      return;
+    }
+    final data =
+        await supabase.from('profiles').select().eq('id', profileId).single();
+    final profile = Profile.fromMap(data);
+    setState(() {
+      _profileCache[profileId] = profile;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GeneralPage(
@@ -23,10 +56,141 @@ class _ProductPageState extends State<ProductPage> {
             Get.to(AddProductPage());
           },
           child: Icon(Icons.add)),
-      child: Column(
-        children: [
-          
-        ],
+      child: session == null
+          ? Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Center(
+                    child: Text(
+                        'Anda belum Login, Silahkan login terlebih dahulu')),
+                SizedBox(
+                  height: 20,
+                ),
+                ElevatedButton(
+                    onPressed: () {
+                      Get.to(SignInPage());
+                    },
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: mainColor,
+                        shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8))),
+                    child: Text(
+                      'Login',
+                      style: GoogleFonts.poppins(
+                        color: Colors.white,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    )),
+              ],
+            )
+          : StreamBuilder(
+              stream: _productsStream,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return CircularProgressIndicator();
+                } else if (snapshot.connectionState == ConnectionState.done ||
+                    snapshot.connectionState == ConnectionState.active) {
+                  log(snapshot.data.toString());
+                  if (snapshot.hasData) {
+                    log('sukses');
+                    final products = snapshot.data!;
+                    // return Text(products[0]['name']);
+                    return Container(
+                      height: 400,
+                      child: ListView.builder(
+                        itemCount: products.length,
+                        itemBuilder: (context, index) {
+                          Product product = Product.fromMap(
+                              map: products[index],
+                              myUserId: products[index]['profile_id']);
+                          return _ProductCard(
+                            product: product,
+                            profile: _profileCache[product.profileId],
+                          );
+                        },
+                      ),
+                    );
+                    // return Container(
+                    //   height: MediaQuery.of(context).size.height*0.7,
+                    //   color: Colors.white,
+                    //     child: products.isEmpty
+                    //         ? const Center(
+                    //             child: Text('Belum ada product'),
+                    //           )
+                    //         : ListView.builder(
+                    //             reverse: true,
+                    //             itemCount: products.length,
+                    //             itemBuilder: (context, index) {
+                    //               final productName = products[index];
+                    //               Product product = Product.fromMap(
+                    //                   map: products[index],
+                    //                   myUserId: products[index]
+                    //                       ['profile_id']);
+                    //               // return _ProductCard(
+                    //               //   product: product,
+                    //               //   profile: _profileCache[
+                    //               //       product.profileId],
+                    //               // );
+                    //               return ListTile(title: Text(product.name??'-'),);
+                    //             }));
+                  } else {
+                    log('gagal');
+                    return preloader;
+                  }
+                }
+                return Text('error');
+              },
+            ),
+    );
+  }
+}
+
+class _ProductCard extends StatelessWidget {
+  const _ProductCard({
+    Key? key,
+    required this.product,
+    required this.profile,
+  }) : super(key: key);
+
+  final Product product;
+  final Profile? profile;
+
+  @override
+  Widget build(BuildContext context) {
+    List<Widget> productContents = [
+      if (!product.isMine)
+        CircleAvatar(
+          child: profile == null
+              ? preloader
+              : Text(profile!.username.substring(0, 2)),
+        ),
+      const SizedBox(width: 12),
+      Flexible(
+        child: Container(
+          padding: const EdgeInsets.symmetric(
+            vertical: 8,
+            horizontal: 12,
+          ),
+          decoration: BoxDecoration(
+            color: product.isMine ? "CBDDFB".toColor() : Colors.grey[300],
+            borderRadius: BorderRadius.circular(8),
+          ),
+          child: Text(product.name!),
+        ),
+      ),
+      const SizedBox(width: 12),
+      Text(format(product.createdAt!, locale: 'en_short')),
+      const SizedBox(width: 60),
+    ];
+    if (product.isMine) {
+      productContents = productContents.reversed.toList();
+    }
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
+      child: Row(
+        mainAxisAlignment:
+            product.isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+        children: productContents,
       ),
     );
   }
