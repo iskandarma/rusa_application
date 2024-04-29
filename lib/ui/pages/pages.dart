@@ -30,5 +30,6 @@ part 'change_profile.dart';
 part 'product_page.dart';
 part 'add_product_page.dart';
 part 'chat_page.dart';
-part 'avatar.dart';
+part '../widgets/avatar.dart';
 part 'account_page.dart';
+part '../widgets/product_image.dart';

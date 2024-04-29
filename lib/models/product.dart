@@ -9,6 +9,7 @@ class Product {
   final bool? isFree;
   final bool? isBarter;
   final int? price;
+  final int? quantity;
   final DateTime? createdAt;
   final DateTime? updatedAt;
   final String? location;
@@ -23,6 +24,7 @@ class Product {
       this.isBarter,
       this.description,
       this.price,
+      this.quantity,
       this.createdAt,
       this.updatedAt,
       this.location,
@@ -36,6 +38,7 @@ class Product {
         name = map['name'],
         picturePath = map['photo_url'],
         price = map['price'],
+        quantity = map['quantity'],
         description = map['description'],
         isFree = map['is_free'],
         isBarter = map['is_barter'],
@@ -51,7 +54,15 @@ Product mockProduct = Product(
     name: "Kramik Motif Coklat",
     description: "",
     price: 123,
-    isMine: true);
+    isMine: true,
+    profileId: '2',
+    createdAt: DateTime(2024),
+    isBarter: true,
+    isFree: true,
+    location: 'test',
+    quantity: 2,
+    updatedAt: DateTime(2024),
+    );
 
 Product mockProduct2 = Product(
     id: '2',
@@ -60,7 +71,14 @@ Product mockProduct2 = Product(
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
     price: 123,
-    isMine: true);
+    isMine: true,
+    profileId: '2',
+    createdAt: DateTime(2024),
+    isBarter: true,
+    isFree: true,
+    location: 'test',
+    quantity: 2,
+    updatedAt: DateTime(2024),);
 
 Product mockProduct3 = Product(
     id: '3',
@@ -69,7 +87,14 @@ Product mockProduct3 = Product(
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
     price: 123,
-    isMine: true);
+    isMine: true,
+    profileId: '2',
+    createdAt: DateTime(2024),
+    isBarter: true,
+    isFree: true,
+    location: 'test',
+    quantity: 2,
+    updatedAt: DateTime(2024),);
 
 Product mockProduct4 = Product(
     id: '4',
@@ -78,7 +103,14 @@ Product mockProduct4 = Product(
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
     price: 123,
-    isMine: true);
+    isMine: true,
+    profileId: '2',
+    createdAt: DateTime(2024),
+    isBarter: true,
+    isFree: true,
+    location: 'test',
+    quantity: 2,
+    updatedAt: DateTime(2024),);
 
 Product mockProduct5 = Product(
     id: '5',
@@ -87,4 +119,11 @@ Product mockProduct5 = Product(
     description:
         "Daging (biasanya sih, ayam kalau di kondangan) yang dibakar dengan bumbu kecap dan kacang ini menempati posisi pertama hidangan yang paling diincar saat kondangan",
     price: 123,
-    isMine: true);
+    isMine: true,
+    profileId: '2',
+    createdAt: DateTime(2024),
+    isBarter: true,
+    isFree: true,
+    location: 'test',
+    quantity: 2,
+    updatedAt: DateTime(2024),);

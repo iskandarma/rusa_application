@@ -1,4 +1,4 @@
-part of 'pages.dart';
+part of '../pages/pages.dart';
 
 class Avatar extends StatefulWidget {
   const Avatar({

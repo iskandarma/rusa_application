@@ -21,10 +21,6 @@ class _ProductPageState extends State<ProductPage> {
           .stream(primaryKey: ['id'])
           .eq('profile_id', myUserId)
           .order('created_at');
-      // .map((maps) => maps
-      //     .map((map) => Product.fromMap(map: map, myUserId: myUserId))
-      //     .toList());
-      //     log('Sukses' + _productsStream.toString());
     }
     super.initState();
   }
@@ -92,7 +88,6 @@ class _ProductPageState extends State<ProductPage> {
                     snapshot.connectionState == ConnectionState.active) {
                   log(snapshot.data.toString());
                   if (snapshot.hasData) {
-                    log('sukses');
                     final products = snapshot.data!;
                     // return Text(products[0]['name']);
                     return Container(
@@ -110,31 +105,7 @@ class _ProductPageState extends State<ProductPage> {
                         },
                       ),
                     );
-                    // return Container(
-                    //   height: MediaQuery.of(context).size.height*0.7,
-                    //   color: Colors.white,
-                    //     child: products.isEmpty
-                    //         ? const Center(
-                    //             child: Text('Belum ada product'),
-                    //           )
-                    //         : ListView.builder(
-                    //             reverse: true,
-                    //             itemCount: products.length,
-                    //             itemBuilder: (context, index) {
-                    //               final productName = products[index];
-                    //               Product product = Product.fromMap(
-                    //                   map: products[index],
-                    //                   myUserId: products[index]
-                    //                       ['profile_id']);
-                    //               // return _ProductCard(
-                    //               //   product: product,
-                    //               //   profile: _profileCache[
-                    //               //       product.profileId],
-                    //               // );
-                    //               return ListTile(title: Text(product.name??'-'),);
-                    //             }));
                   } else {
-                    log('gagal');
                     return preloader;
                   }
                 }
@@ -158,38 +129,61 @@ class _ProductCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     List<Widget> productContents = [
-      if (!product.isMine)
-        CircleAvatar(
-          child: profile == null
-              ? preloader
-              : Text(profile!.username.substring(0, 2)),
-        ),
-      const SizedBox(width: 12),
       Flexible(
         child: Container(
+          width: double.infinity,
+          height: 100,
           padding: const EdgeInsets.symmetric(
             vertical: 8,
             horizontal: 12,
           ),
           decoration: BoxDecoration(
-            color: product.isMine ? "CBDDFB".toColor() : Colors.grey[300],
+            color: "CBDDFB".toColor(),
             borderRadius: BorderRadius.circular(8),
           ),
-          child: Text(product.name!),
+          child: Row(
+            children: [
+              if (product.picturePath == null)
+                Container(
+                  width: 80,
+                  height: 80,
+                  color: Colors.grey,
+                  child: const Center(
+                    child: Text('No Image'),
+                  ),
+                )
+              else
+                ProductImage(imageUrl: product.picturePath!),
+              SizedBox(
+                width: defaultMargin,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    product.name!,
+                    style: blackFontStyle1,
+                  ),
+                  Text(
+                    product.description!.toString(),
+                    style: blackFontStyle2,
+                  ),
+                  Text(
+                    product.quantity!.toString(),
+                    style: blackBoldFontStyle2,
+                  ),
+                ],
+              ),
+            ],
+          ),
         ),
       ),
-      const SizedBox(width: 12),
-      Text(format(product.createdAt!, locale: 'en_short')),
-      const SizedBox(width: 60),
     ];
-    if (product.isMine) {
-      productContents = productContents.reversed.toList();
-    }
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 18),
       child: Row(
-        mainAxisAlignment:
-            product.isMine ? MainAxisAlignment.end : MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: productContents,
       ),
     );
